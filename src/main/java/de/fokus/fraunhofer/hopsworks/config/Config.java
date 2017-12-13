@@ -1,4 +1,4 @@
-package de.fokus.fraunhofer.hopswork.config;
+package de.fokus.fraunhofer.hopsworks.config;
 
 import java.util.Map;
 

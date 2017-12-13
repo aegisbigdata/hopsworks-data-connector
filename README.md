@@ -1,8 +1,8 @@
-# Hopswork Data Connector
-Java client for communication with the Hopswork API
+# Hopsworks Data Connector
+Java client for communication with the Hopsworks API
 
-## Config File for Hopswork API
-Configuration file for the Hopswork API can be found here
+## Config File for Hopsworks API
+Configuration file for the Hopsworks API can be found here
 [confg.yml](config.yml)
 
 ## JFlow File Upload
@@ -17,7 +17,7 @@ JFlow simulates the behaviour of <a href="https://github.com/flowjs/">flow.js </
 ```
 
 # Testing
-Under development. Basic tests for the Hopswork API are already included.
+Under development. Basic tests for the Hopsworks API are already included.
 
 ## Testing Flow.js File Upload
 
@@ -53,6 +53,6 @@ Tests are using the API defined in [confg.yml](config.yml)
 
 
 # Dev
-Hopswork Data Connector is currently under development.
+Hopsworks Data Connector is currently under development.
 
 

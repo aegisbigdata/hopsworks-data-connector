@@ -1,17 +1,12 @@
-package de.fokus.fraunhofer.hopswork.adapter;
+package de.fokus.fraunhofer.hopsworks.adapter;
 
-import de.fokus.fraunhofer.hopswork.config.Config;
-import de.fokus.fraunhofer.jflow.auth.CookieAuth;
-import org.apache.http.cookie.Cookie;
+import de.fokus.fraunhofer.hopsworks.config.Config;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.List;
-
 import static org.junit.Assert.assertTrue;
 
-public class HopsworkAdapterTest {
+public class HopsworksAdapterTest {
 
     @Before
     public void setUp(){
@@ -22,8 +17,8 @@ public class HopsworkAdapterTest {
     @Test
     public void readConfigFileTest() {
 
-        HopsworkAdapter hopsworkAdapter = new HopsworkAdapter();
-        Config config = hopsworkAdapter.getConfig();
+        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
+        Config config = hopsworksAdapter.getConfig();
         String url = config.getServer().get("url");
 
         assertTrue("should load config file and basic check url ",url.contains("http://"));
@@ -38,8 +33,8 @@ public class HopsworkAdapterTest {
         String projectId = "1";
         String folder = "upload/test_mpo";
 
-        HopsworkAdapter hopsworkAdapter = new HopsworkAdapter();
-        hopsworkAdapter.actionUploadFile(projectId,folder,filePath);
+        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
+        hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
 
         //TODO automatic file upload check
 
@@ -52,8 +47,8 @@ public class HopsworkAdapterTest {
         String projectId = "1";
         String folder = "upload/test_mpo";
 
-        HopsworkAdapter hopsworkAdapter = new HopsworkAdapter();
-        hopsworkAdapter.actionUploadFile(projectId,folder,filePath);
+        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
+        hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
 
         //TODO automatic file upload check
 

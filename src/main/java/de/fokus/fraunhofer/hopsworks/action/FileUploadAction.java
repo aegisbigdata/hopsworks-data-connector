@@ -1,12 +1,10 @@
-package de.fokus.fraunhofer.hopswork.action;
+package de.fokus.fraunhofer.hopsworks.action;
 
-import de.fokus.fraunhofer.hopswork.config.Config;
+import de.fokus.fraunhofer.hopsworks.config.Config;
 import de.fokus.fraunhofer.jflow.http.HTTPFileUpload;
 import org.apache.http.HttpStatus;
 
-import java.io.IOException;
-
-public class FileUploadAction implements IHopsworkAction {
+public class FileUploadAction implements IHopsworksAction {
 
     private Config config;
     private String hopsworkProjectId;

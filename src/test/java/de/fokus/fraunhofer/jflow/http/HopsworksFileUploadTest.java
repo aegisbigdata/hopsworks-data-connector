@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static junit.framework.Assert.assertTrue;
 
-public class HopsworkFileUploadTest {
+public class HopsworksFileUploadTest {
 
     HTTPFileUpload httpFileUpload = null;
 
