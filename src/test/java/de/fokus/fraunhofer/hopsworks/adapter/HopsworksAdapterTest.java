@@ -30,8 +30,8 @@ public class HopsworksAdapterTest {
         // sample path /project/1/dataset/upload/test_mpo"
         String filePath = "sample-files/obama.jpg";
 
-        String projectId = "1";
-        String folder = "upload/test_mpo";
+        String projectId = "1027";
+        String folder = "upload/fokus_mpo_data";
 
         HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
         hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
@@ -44,8 +44,8 @@ public class HopsworksAdapterTest {
 
         String filePath = "sample-files/pizigani.jpg";
 
-        String projectId = "1";
-        String folder = "upload/test_mpo";
+        String projectId = "1027";
+        String folder = "upload/fokus_mpo_data";
 
         HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
         hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
