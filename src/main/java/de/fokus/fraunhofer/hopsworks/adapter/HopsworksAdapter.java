@@ -33,6 +33,15 @@ public class HopsworksAdapter {
 
    }
 
+   public HopsworksAdapter(String configFilePath){
+      try {
+         this.config = new ConfigReader().read(configFilePath);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+
+
    public void actionUploadFile(String hopsworkProjectId,String hopsworkFolder,String filePath){
 
       IHopsworksAction uploadAction = new FileUploadAction(this.config,hopsworkProjectId,hopsworkFolder,filePath);

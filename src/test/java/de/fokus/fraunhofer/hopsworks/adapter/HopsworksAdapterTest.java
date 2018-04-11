@@ -15,6 +15,20 @@ public class HopsworksAdapterTest {
     }
 
     @Test
+    public void readConfigFileWithPathTest() {
+
+        String testConfigFilePath = "config.yml";
+
+        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter(testConfigFilePath);
+        Config config = hopsworksAdapter.getConfig();
+        String url = config.getServer().get("url");
+
+        assertTrue("should load config file and basic check url ",url.contains("http://"));
+
+    }
+
+
+    @Test
     public void readConfigFileTest() {
 
         HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
