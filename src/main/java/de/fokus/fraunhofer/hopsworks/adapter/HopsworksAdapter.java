@@ -6,6 +6,7 @@ import de.fokus.fraunhofer.hopsworks.action.FileUploadAction;
 import de.fokus.fraunhofer.hopsworks.action.IHopsworksAction;
 import de.fokus.fraunhofer.hopsworks.config.Config;
 import de.fokus.fraunhofer.hopsworks.config.ConfigReader;
+import de.fokus.fraunhofer.hopsworks.config.HopsworksAPIConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +14,8 @@ import java.io.IOException;
 public class HopsworksAdapter {
 
 
-
    private Config config;
+   private HopsworksAPIConfig hopsworkAPIConfig;
 
    public void setConfig(Config config) {
       this.config = config;
@@ -39,6 +40,11 @@ public class HopsworksAdapter {
       } catch (IOException e) {
          e.printStackTrace();
       }
+   }
+
+   public HopsworksAdapter(String apiUrl,String userName, String password) {
+
+      this.hopsworkAPIConfig = new HopsworksAPIConfig(userName,password,apiUrl);
    }
 
 
