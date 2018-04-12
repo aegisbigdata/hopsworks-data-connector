@@ -7,10 +7,13 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class HopsworksFileUploadTest {
 
     HTTPFileUpload httpFileUpload = null;
+    String projectId;
+    String folder;
 
     @Before
     public void setUp(){
@@ -18,9 +21,12 @@ public class HopsworksFileUploadTest {
         String email = "admin@kth.se";
         String password = "admin";
 
-        String ipAddress = "http://bbc6.sics.se";
+        String ipAddress = "http://bbc6.sics.se"; //test server
         int port = 8080;
         String path = "/hopsworks-api/api";
+
+        projectId = "1027";
+        folder = "upload/fokus_mpo_data";
 
         httpFileUpload = new HTTPFileUpload(ipAddress,port,true,path);
         httpFileUpload.activateAuth(email,password,authPath);
@@ -30,8 +36,8 @@ public class HopsworksFileUploadTest {
     @Test
     public void simpleFileUploadTest() {
 
-      /*  //String uploadPath = "/project/{id}/dataset/{fileName}";
-        String testProjectUploadPath = "/project/1/dataset/upload/test_mpo";
+        //String uploadPath = "/project/{id}/dataset/{fileName}";
+        String testProjectUploadPath = "/project/"+projectId+"/dataset/"+folder;
 
         int statusCode = 0;
         try {
@@ -41,14 +47,14 @@ public class HopsworksFileUploadTest {
             e.printStackTrace();
         }
 
-        assertTrue( "statusCode should be 200 OK",statusCode == HttpStatus.SC_OK  ); */
+        assertEquals( "statusCode should be 200 OK",statusCode,HttpStatus.SC_OK  );
     }
     @Test
     public void mediumFileUploadTest()
     {
 
-       /* //String uploadPath = "/project/{id}/dataset/{fileName}";
-        String testProjectUploadPath = "/project/1/dataset/upload/test_mpo";
+        //String uploadPath = "/project/{id}/dataset/{fileName}";
+        String testProjectUploadPath = "/project/"+projectId+"/dataset/"+folder;
 
         int statusCode = 0;
         try {
@@ -58,7 +64,7 @@ public class HopsworksFileUploadTest {
             e.printStackTrace();
         }
 
-        assertTrue( "statusCode should be 200 OK",statusCode == HttpStatus.SC_OK  ); */
+        assertEquals( "statusCode should be 200 OK",statusCode, HttpStatus.SC_OK  );
     }
 
 }

@@ -1,53 +1,33 @@
 package de.fokus.fraunhofer.hopsworks.adapter;
 
-import de.fokus.fraunhofer.hopsworks.config.Config;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 public class HopsworksAdapterTest {
+
+    HopsworksAdapter hopsworksAdapter;
+    String projectId;
+    String folder;
 
     @Before
     public void setUp(){
 
+        String url = "http://bbc6.sics.se:8080/hopsworks-api/api";  //test server
+        String email = "admin@kth.se";
+        String password = "admin";
 
+        hopsworksAdapter = new HopsworksAdapter(email,password,url);
+
+         projectId = "1027";
+         folder = "upload/fokus_mpo_data";
     }
 
-    @Test
-    public void readConfigFileWithPathTest() {
-
-        String testConfigFilePath = "config.yml";
-
-        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter(testConfigFilePath);
-        Config config = hopsworksAdapter.getConfig();
-        String url = config.getServer().get("url");
-
-        assertTrue("should load config file and basic check url ",url.contains("http://"));
-
-    }
-
-
-    @Test
-    public void readConfigFileTest() {
-
-        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
-        Config config = hopsworksAdapter.getConfig();
-        String url = config.getServer().get("url");
-
-        assertTrue("should load config file and basic check url ",url.contains("http://"));
-
-    }
     @Test
     public void simpleFileUploadTest() {
 
         // sample path /project/1/dataset/upload/test_mpo"
         String filePath = "sample-files/obama.jpg";
 
-        String projectId = "1027";
-        String folder = "upload/fokus_mpo_data";
-
-        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
         hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
 
         //TODO automatic file upload check
@@ -61,7 +41,6 @@ public class HopsworksAdapterTest {
         String projectId = "1027";
         String folder = "upload/fokus_mpo_data";
 
-        HopsworksAdapter hopsworksAdapter = new HopsworksAdapter();
         hopsworksAdapter.actionUploadFile(projectId,folder,filePath);
 
         //TODO automatic file upload check

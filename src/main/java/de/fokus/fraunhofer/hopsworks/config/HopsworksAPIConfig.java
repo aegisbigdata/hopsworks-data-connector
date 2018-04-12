@@ -1,10 +1,15 @@
 package de.fokus.fraunhofer.hopsworks.config;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class HopsworksAPIConfig {
 
     private String userName;
     private String password;
     private String apiUrl;
+
+    private URL url;
 
     private final String DEFAULT_PATH_FILE_UPLOAD = "/project/{id}/dataset/{fileName}";
     private final String DEFAULT_PATH_LOGIN = "/auth/login";
@@ -17,6 +22,12 @@ public class HopsworksAPIConfig {
         this.userName = userName;
         this.password = password;
         this.apiUrl = apiUrl;
+
+        try {
+            this.url = new URL(this.apiUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         this.pathLogin = this.DEFAULT_PATH_LOGIN;
         this.pathFileUpload = this.DEFAULT_PATH_FILE_UPLOAD;
@@ -61,4 +72,22 @@ public class HopsworksAPIConfig {
     public void setApiUrl(String apiUrl) {
         this.apiUrl = apiUrl;
     }
+
+    public int getPort(){
+        int port = this.url.getPort();
+        if(port == -1){
+            return 80; //no specific port in the url means standard port 80
+        }
+        return port;
+    }
+    public String getHost(){
+        return this.url.getHost();
+    }
+    public String getPath(){
+        return this.url.getPath();
+    }
+    public String getProtocol() {
+        return this.url.getProtocol();
+    }
+
 }
