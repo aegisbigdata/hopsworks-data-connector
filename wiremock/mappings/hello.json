@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/api/helloworld"
+    },
+    "response": {
+        "status": 200,
+        "body": "hello wiremock \n"
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/hopsworks-api/api/auth/login",
+    "headers" : {
+      "Accept" : {
+        "contains" : "application/json, text/plain"
+      },
+      "Accept-Encoding" : {
+        "contains" : "gzip, deflate"
+      },
+      "Content-Type" : {
+        "contains" : "application/x-www-form-urlencoded"
+      }
+
+    },
+    "queryParameters": {
+      "email": {
+        "equalTo": "admin@kth.se"
+      },
+      "otp": {
+        "equalTo": ""
+      },
+      "password": {
+        "equalTo": "admin"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": "More content\n"
+  }
+}
