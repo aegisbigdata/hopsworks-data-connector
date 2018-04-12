@@ -6,6 +6,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -21,6 +23,8 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
     private final long FLOW_STANDARD_CHUNK_SIZE = 1024*1024;
 
     private long sizeLastChunk;
+
+    private static final Logger logger = LoggerFactory.getLogger(FileReader.class);
 
     private long calculateSizeLastChunk(long chunkSize,long fileSize){
 
@@ -48,7 +52,7 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
         Path path = Paths.get(filePath);
         String fileName = path.getFileName().toString();
 
-        System.out.println("[Info] FileName: "+fileName);
+        logger.info("FileName: "+fileName);
 
         fileReader = new FileReader();
         long fileSize = fileReader.open(filePath);
@@ -67,9 +71,9 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
         parameter.setFlowRelativePath(fileName);
 
         long totalChunks = calculateTotalChunks(this.FLOW_STANDARD_CHUNK_SIZE,fileSize);
-        System.out.println("[Info] Total File Chunks:"+totalChunks);
+        logger.info("Total File Chunks:"+totalChunks);
         this.sizeLastChunk = this.calculateSizeLastChunk(this.FLOW_STANDARD_CHUNK_SIZE,fileSize);
-        System.out.println("[Info] Last Chunk Size:"+this.sizeLastChunk);
+        logger.info("Last Chunk Size:"+this.sizeLastChunk);
         parameter.setFlowTotalChunks(totalChunks);
 
     }
@@ -113,7 +117,7 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
 
     public HttpEntity next() throws IOException,NoSuchElementException {
 
-        System.out.println("[Info] File Chunk Number: " + parameter.getFlowChunkNumber());
+        logger.info("File Chunk Number: " + parameter.getFlowChunkNumber());
         if(parameter.getFlowChunkNumber() > parameter.getFlowTotalChunks()) {
             throw new NoSuchElementException();
         }
@@ -151,7 +155,7 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
         HttpEntity entity = builder.build();
 
         //print http entity
-        //System.out.println(this.toStringHttpEntity(entity));
+        //logger.info(this.toStringHttpEntity(entity));
 
 
         this.increaseChunkNumber();

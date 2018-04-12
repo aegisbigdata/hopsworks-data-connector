@@ -1,5 +1,9 @@
 package de.fokus.fraunhofer.jflow.io;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -7,10 +11,12 @@ public class FileReader {
 
     private RandomAccessFile raf;
 
+    private static final Logger logger = LoggerFactory.getLogger(FileReader.class);
+
     public long open(String filePath) throws IOException{
         raf = new RandomAccessFile(filePath, "r");
         long fileSize = raf.length();
-        System.out.println("[Info] File Size: "+ fileSize);
+        logger.info("File Size: "+ fileSize);
         return fileSize;
 
     }

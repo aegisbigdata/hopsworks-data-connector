@@ -17,6 +17,8 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +29,8 @@ public class HTTPFileUpload {
 
     private Server httpServer;
     private AuthData authData;
+
+    private static final Logger logger = LoggerFactory.getLogger(HTTPFileUpload.class);
 
     public void activateAuth(String email,String password,String authPath) {
         this.authData = new AuthData(email,password,authPath);
@@ -98,7 +102,7 @@ public class HTTPFileUpload {
 
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("[Info] File Total Upload Time: " + (endTime - startTime) + " milliseconds");
+        logger.info("File Total Upload Time: " + (endTime - startTime) + " milliseconds");
         return statusCode;
 
     }
@@ -108,7 +112,7 @@ public class HTTPFileUpload {
         int statusCode;
         HttpEntity entity = entityGenerator.next();
         post.setEntity(entity);
-        System.out.println("\n[Info] "+post.toString());
+        logger.info(post.toString());
 
         HttpResponse response;
         if(this.httpServer.isAuthentication()){
@@ -122,11 +126,11 @@ public class HTTPFileUpload {
 
         statusCode = statusLine.getStatusCode();
 
-        //System.out.println("API Response ==> " + response.toString());
+        //logger.info("API Response ==> " + response.toString());
 
         InputStream responseContent = response.getEntity().getContent();
 
-        System.out.println("[Info] API Response ==> "+convertStreamToString(responseContent));
+        logger.info("API Response ==> "+convertStreamToString(responseContent));
 
         return statusCode;
 

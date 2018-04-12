@@ -13,6 +13,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,6 +30,8 @@ public class CookieAuth {
     private String password;
 
     private Server server;
+    private static final Logger logger = LoggerFactory.getLogger(CookieAuth.class);
+
 
     public CookieAuth(String authUrl,String email,String password){
         this.authUrl = authUrl;
@@ -56,7 +60,7 @@ public class CookieAuth {
 
         for (Iterator<Cookie> iter = cookies.listIterator(); iter.hasNext(); ) {
             Cookie cookie = iter.next();
-            System.out.println(cookie.toString());
+            logger.info(cookie.toString());
 
         }
 
@@ -94,9 +98,9 @@ public class CookieAuth {
             response.close();
         }
 
-        System.out.println("[Info] Cookie Auth @ "+ this.authUrl);
+        logger.info(" Cookie Auth @ "+ this.authUrl);
         this.printCookies(cookies);
-        System.out.println("[Info] Status Code: " + response.getStatusLine().getStatusCode() + "\n\n");
+        logger.info("Status Code: " + response.getStatusLine().getStatusCode() + "\n\n");
 
 
         client.close();
