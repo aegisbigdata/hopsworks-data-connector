@@ -1,16 +1,12 @@
 package de.fokus.fraunhofer.jflow.auth;
 
-import de.fokus.fraunhofer.hopsworks.config.Config;
-import de.fokus.fraunhofer.hopsworks.config.ConfigReader;
 import de.fokus.fraunhofer.hopsworks.config.HopsworksAPIConfig;
 import org.apache.http.cookie.Cookie;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 

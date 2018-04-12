@@ -1,6 +1,5 @@
 package de.fokus.fraunhofer.hopsworks.action;
 
-import de.fokus.fraunhofer.hopsworks.config.Config;
 import de.fokus.fraunhofer.hopsworks.config.HopsworksAPIConfig;
 import de.fokus.fraunhofer.jflow.http.HTTPFileUpload;
 import org.apache.http.HttpStatus;
