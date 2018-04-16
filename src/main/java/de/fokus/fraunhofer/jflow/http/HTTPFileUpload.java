@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class HTTPFileUpload {
@@ -69,8 +71,7 @@ public class HTTPFileUpload {
     }
 
 
-    public int uploadFile(String filePath,String apiPath) throws IOException{
-
+    private int startUploadFile(String filePath,String apiPath,String targetFileName) throws IOException{
         String apiUrl = this.httpServer.generateAPIUrl(apiPath);
         final HttpClient client = HttpClientBuilder.create().build();
         final HttpPost post = new HttpPost(apiUrl);
@@ -87,7 +88,7 @@ public class HTTPFileUpload {
 
         IFileToHttpEntity entityGenerator = new FlowHttpEntityGenerator();
 
-        entityGenerator.init(filePath);
+        entityGenerator.init(filePath, targetFileName);
 
         int statusCode = 0;
 
@@ -105,6 +106,20 @@ public class HTTPFileUpload {
         logger.info("File Total Upload Time: " + (endTime - startTime) + " milliseconds");
         return statusCode;
 
+    }
+
+    public int uploadFile(String filePath,String apiPath) throws IOException{
+
+        Path path = Paths.get(filePath);
+        String targetFileName = path.getFileName().toString();
+
+        return this.startUploadFile(filePath,apiPath,targetFileName);
+    }
+
+
+    public int uploadFile(String filePath,String apiPath, String targetFileName) throws IOException{
+
+        return this.startUploadFile(filePath,apiPath,targetFileName);
     }
 
     private int uploadChunk(IFileToHttpEntity entityGenerator, HttpPost post, HttpClient client,

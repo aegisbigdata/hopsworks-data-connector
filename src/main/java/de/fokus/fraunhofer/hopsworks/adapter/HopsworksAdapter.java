@@ -32,5 +32,15 @@ public class HopsworksAdapter {
          e.printStackTrace();
       }
    }
+   public void actionUploadFile(String hopsworkProjectId,String hopsworkFolder,String filePath,String targetFileName){
+
+      IHopsworksAction uploadAction = new FileUploadAction(this.hopsworkAPIConfig, hopsworkProjectId,hopsworkFolder,filePath, targetFileName);
+
+      try {
+         uploadAction.execute();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 
 }

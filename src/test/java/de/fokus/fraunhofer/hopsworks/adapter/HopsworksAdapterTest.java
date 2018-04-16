@@ -22,6 +22,20 @@ public class HopsworksAdapterTest {
          folder = "upload/fokus_mpo_data";
     }
 
+
+    @Test
+    public void simpleFileUploadWithTargetFileNameTest() {
+
+        String filePath = "sample-files/obama.jpg";
+        String targetFileName = "barack-obama.jpg";
+
+        hopsworksAdapter.actionUploadFile(projectId,folder,filePath, targetFileName);
+
+        //TODO automatic file upload check
+
+    }
+
+
     @Test
     public void simpleFileUploadTest() {
 

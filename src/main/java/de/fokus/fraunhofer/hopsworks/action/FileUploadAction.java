@@ -10,22 +10,31 @@ public class FileUploadAction implements IHopsworksAction {
     private String hopsworkProjectId;
     private String hopsworkFolder;
     private String filePath;
+    private String targetFileName = null;
 
     private HTTPFileUpload httpFileUpload = null;
 
+    public FileUploadAction(HopsworksAPIConfig hopsworksAPIConfig, String hopsworkProjectId, String hopsworkFolder, String filePath,
+    String targetFileName){
+
+        this.targetFileName = targetFileName; //optional parameter
+        this.init(hopsworksAPIConfig,hopsworkProjectId,hopsworkFolder,filePath);
+
+    }
+
+
     public FileUploadAction(HopsworksAPIConfig hopsworksAPIConfig, String hopsworkProjectId, String hopsworkFolder, String filePath){
+
+        this.init(hopsworksAPIConfig,hopsworkProjectId,hopsworkFolder,filePath);
+
+    }
+
+    private void init(HopsworksAPIConfig hopsworksAPIConfig, String hopsworkProjectId, String hopsworkFolder, String filePath){
 
         this.hopsworksAPIConfig = hopsworksAPIConfig;
         this.hopsworkProjectId = hopsworkProjectId;
         this.hopsworkFolder = hopsworkFolder;
         this.filePath = filePath;
-
-        this.init();
-
-    }
-
-    private void init(){
-        String url = this.hopsworksAPIConfig.getApiUrl();
 
         String authPath = this.hopsworksAPIConfig.getPathLogin();
         String userName = this.hopsworksAPIConfig.getUserName();
@@ -50,7 +59,13 @@ public class FileUploadAction implements IHopsworksAction {
 
         int statusCode;
         String completeUploadPath = generateUploadPath();
-        statusCode = httpFileUpload.uploadFile(this.filePath,completeUploadPath);
+        if(this.targetFileName == null) {
+            statusCode = httpFileUpload.uploadFile(this.filePath, completeUploadPath);
+        }
+        else
+        {
+            statusCode = httpFileUpload.uploadFile(this.filePath, completeUploadPath,this.targetFileName);
+        }
 
         if(statusCode != HttpStatus.SC_OK){
             throw new Exception("HTTP File Upload not successful");

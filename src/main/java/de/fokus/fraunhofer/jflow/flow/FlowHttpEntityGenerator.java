@@ -47,10 +47,7 @@ public class FlowHttpEntityGenerator implements IFileToHttpEntity {
 
     }
 
-    public void init(String filePath) throws IOException {
-
-        Path path = Paths.get(filePath);
-        String fileName = path.getFileName().toString();
+    public void init(String filePath, String fileName) throws IOException {
 
         logger.info("FileName: "+fileName);
 
